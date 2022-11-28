@@ -8,5 +8,6 @@ public class EngProject {
     public static void main (String [] args){
         System.out.println("Simply get good.");
         System.out.println("I am good.");
+        System.out.println("Good.");
     }
 }
