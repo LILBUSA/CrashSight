@@ -20,23 +20,34 @@ public class ExcelReader {
         file = new File(pathName);
         fis = new FileInputStream(file);
         wb = new XSSFWorkbook(fis);
-        sheet = wb.getSheetAt(0);
+        sheet = wb.getSheetAt(0); // sheet 0 of workbook
         formulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
     }
 
-    public String readCellData(int vRow, int vColumn) {
+    /* returns the cell at the position (vRow, vColumn) of the current sheet
+     */
+    public Cell getCell(int vRow, int vColumn) {
         String value = null;          //variable for storing the cell value
-        Workbook wb = null;           //initialize Workbook null
         try {
-            FileInputStream fis = new FileInputStream("C:\\Users\\bigta\\IdeaProjects\\Event Token Calculator\\assets\\championstats.xlsx");
+            fis = new FileInputStream(file);
             wb = new XSSFWorkbook(fis);
         } catch(IOException e) {
             e.printStackTrace();
         }
-        Sheet sheet = wb.getSheetAt(0);   //getting the XSSFSheet object at given index
         Row row = sheet.getRow(vRow); //returns the logical row
-        Cell cell = row.getCell(vColumn); //getting the cell representing the given column
-        value = formatter.formatCellValue(cell);    //getting cell value
-        return value;               //returns the cell value
+        return row.getCell(vColumn); //returns the cell
+    }
+
+    public double readNumericCellData(int vRow, int vColumn) {
+        String value = null;          //variable for storing the cell value
+        try {
+            fis = new FileInputStream(file);
+            wb = new XSSFWorkbook(fis);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        Row row = sheet.getRow(vRow); //returns the logical row
+        Cell cell = row.getCell(vColumn);
+        return cell.getNumericCellValue();
     }
 }
