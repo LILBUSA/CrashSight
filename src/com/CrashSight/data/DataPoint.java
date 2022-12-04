@@ -3,13 +3,13 @@ package com.CrashSight.data;
 public class DataPoint extends Date {
     public double data;
 
-    public DataPoint(int m, int y, double d) {
-        super(m, y);
+    public DataPoint(int q, int y, double d) {
+        super(q, y);
         data = d;
     }
 
-    public void printDataSet() {
-        System.out.println(getMonth() + "/" + getYear() + ": " + data);
+    public String printDataSet() {
+        return  getYear() + "/Q" + getQuarter() + ": " + data;
     }
 
 }
